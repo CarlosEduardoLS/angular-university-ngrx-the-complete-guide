@@ -1,6 +1,6 @@
 ## Angular University Ngrx The Complete Guide
 
-![Screenshot](https://github.com/CarlosEduardoLS/angular-university-reactive/blob/master/src/assets/ngrx-the-complete-guide.jpg)
+![Screenshot](https://github.com/CarlosEduardoLS/angular-university-ngrx-the-complete-guide/blob/master/src/assets/ngrx-the-complete-guide.jpg)
 
 This project has created to validate the knowledges learned in the course 'NgRx The Complete Guide' ministering in Angular University
 
