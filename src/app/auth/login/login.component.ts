@@ -1,7 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { noop } from "rxjs";
+import { tap } from "rxjs/operators";
+import { AuthActions } from "../action-types";
 import { AuthService } from "../auth.service";
+import { AppState } from "../reducers";
 
 @Component({
   selector: "login",
@@ -14,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private readonly store: Store<AppState>
   ) {
     this.form = fb.group({
       email: ["test@angular-university.io", [Validators.required]],
@@ -24,5 +30,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  login() {}
+  login() {
+    const val = this.form.value;
+
+    this.auth
+      .login(val.email, val.password)
+      .pipe(
+        tap((user) => {
+          console.log(user);
+          this.store.dispatch(AuthActions.login({ user }));
+          this.router.navigateByUrl("/courses");
+        })
+      )
+      .subscribe(noop, () => alert("Login Failed"));
+  }
 }
