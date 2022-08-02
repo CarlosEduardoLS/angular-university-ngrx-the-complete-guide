@@ -14,7 +14,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
-import { reducers } from "./auth/reducers";
 
 const routes: Routes = [
   {
@@ -42,7 +41,7 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     AuthModule.forRoot(),
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
