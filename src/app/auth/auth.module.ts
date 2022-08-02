@@ -7,6 +7,8 @@ import { MatInputModule } from "@angular/material/input";
 import { RouterModule } from "@angular/router";
 import { AuthService } from "./auth.service";
 import { LoginComponent } from "./login/login.component";
+import { StoreModule } from "@ngrx/store";
+import * as fromAuth from "./reducers";
 
 @NgModule({
   imports: [
@@ -16,6 +18,7 @@ import { LoginComponent } from "./login/login.component";
     MatInputModule,
     MatButtonModule,
     RouterModule.forChild([{ path: "", component: LoginComponent }]),
+    StoreModule.forFeature("auth", fromAuth.reducers),
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent],
