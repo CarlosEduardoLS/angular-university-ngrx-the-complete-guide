@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import { noop } from "rxjs";
 import { tap } from "rxjs/operators";
 import { AuthActions } from "../action-types";
+import { login } from "../auth.actions";
 import { AuthService } from "../auth.service";
 import { AuthState } from "../reducers";
 
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
       .pipe(
         tap((user) => {
           console.log(user);
-          this.store.dispatch(AuthActions.login({ user }));
+          this.store.dispatch(login({ user }));
           this.router.navigateByUrl("/courses");
         })
       )
