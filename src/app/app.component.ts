@@ -8,6 +8,7 @@ import {
 } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { logout } from "./auth/auth.actions";
 import { isLoggedIn, isLoggedOut } from "./auth/auth.selectors";
 import { AppState } from "./reducers";
 
@@ -50,5 +51,7 @@ export class AppComponent implements OnInit {
     this.isLoggedOut$ = this.store.pipe(select(isLoggedOut));
   }
 
-  logout() {}
+  logout() {
+    this.store.dispatch(logout());
+  }
 }
