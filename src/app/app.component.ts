@@ -8,7 +8,6 @@ import {
 } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 import { isLoggedIn, isLoggedOut } from "./auth/auth.selectors";
 import { AppState } from "./reducers";
 
