@@ -6,11 +6,6 @@ import { AuthActions } from "./action-types";
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly router: Router
-  ) {}
-
   login$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -33,4 +28,6 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
+
+  constructor(private actions$: Actions, private router: Router) {}
 }

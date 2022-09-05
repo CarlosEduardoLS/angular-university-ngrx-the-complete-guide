@@ -9,15 +9,15 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthModule } from "./auth/auth.module";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { RouterState, StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
-import { AuthGuard } from "./auth/auth.guard";
+import { AuthModule } from "./auth/auth.module";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { EffectsModule } from "@ngrx/effects";
-import { RouterState, StoreRouterConnectingModule } from "@ngrx/router-store";
-import { reducers } from "./reducers";
+import { AuthGuard } from "./auth/auth.guard";
+import { metaReducers, reducers } from "./reducers";
 
 const routes: Routes = [
   {
@@ -47,11 +47,12 @@ const routes: Routes = [
     MatToolbarModule,
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers, {
+      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
-        strictStateSerializability: true,
         strictActionSerializability: true,
+        strictStateSerializability: true,
       },
     }),
     StoreDevtoolsModule.instrument({
