@@ -7,5 +7,5 @@ export const loadAllCourses = createAction(
 
 export const allCoursesLoaded = createAction(
   "[Load Courses Effect] All Courses Loaded",
-  props<{ courses: Course[] }>
+  props<{ courses: Course[] }>()
 );
