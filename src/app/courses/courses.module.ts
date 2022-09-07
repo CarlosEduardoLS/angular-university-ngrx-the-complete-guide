@@ -16,7 +16,7 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatTabsModule } from "@angular/material/tabs";
 import { RouterModule, Routes } from "@angular/router";
-import { EntityDefinitionService, EntityMetadataMap } from "@ngrx/data";
+import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from "@ngrx/data";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { coursesReducer } from "./course.reducers";
@@ -26,6 +26,7 @@ import { CoursesEffects } from "./courses.effects";
 import { CoursesResolver } from "./courses.resolver";
 import { EditCourseDialogComponent } from "./edit-course-dialog/edit-course-dialog.component";
 import { HomeComponent } from "./home/home.component";
+import { CoursesDataService } from "./services/courses-data.service";
 import { CourseEntityService } from "./services/courses-entity.service";
 import { CoursesHttpService } from "./services/courses-http.service";
 
@@ -85,10 +86,12 @@ const entityMetadata: EntityMetadataMap = {
     CourseComponent,
   ],
   entryComponents: [EditCourseDialogComponent],
-  providers: [CoursesHttpService, CourseEntityService],
+  providers: [CoursesHttpService, CourseEntityService, CoursesResolver, CoursesDataService],
 })
 export class CoursesModule {
-  constructor(private eds: EntityDefinitionService) {
+  constructor(private eds: EntityDefinitionService, private entityDataService: EntityDataService, private coursesDataService: CoursesDataService) {
     eds.registerMetadataMap(entityMetadata);
+
+    entityDataService.registerService('Course', coursesDataService);
   }
 }
