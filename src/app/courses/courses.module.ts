@@ -18,7 +18,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { RouterModule, Routes } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
-import { coursesReducer } from "./course.reducer";
+import { coursesReducer } from "./course.reducers";
 import { CourseComponent } from "./course/course.component";
 import { CoursesCardListComponent } from "./courses-card-list/courses-card-list.component";
 import { CoursesEffects } from "./courses.effects";
