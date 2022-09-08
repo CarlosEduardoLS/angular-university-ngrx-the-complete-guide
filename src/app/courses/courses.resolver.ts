@@ -9,6 +9,7 @@ import { Observable } from "rxjs";
 import { filter, finalize, first, tap } from "rxjs/operators";
 import { AppState } from "../reducers";
 import { loadAllCourses } from "./course.actions";
+import { areCoursesLoaded } from "./courses.selectors";
 
 @Injectable()
 export class CoursesResolver implements Resolve<any> {
@@ -22,13 +23,13 @@ export class CoursesResolver implements Resolve<any> {
   ): Observable<any> {
     return this.store.pipe(
       select(areCoursesLoaded),
-      tap(coursesLoaded => {
+      tap((coursesLoaded) => {
         if (!this.loading && !coursesLoaded) {
           this.loading = true;
           this.store.dispatch(loadAllCourses());
         }
       }),
-      filter(coursesLoaded => coursesLoaded),
+      filter((coursesLoaded) => coursesLoaded),
       first(),
       finalize(() => (this.loading = false))
     );

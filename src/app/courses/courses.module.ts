@@ -23,7 +23,6 @@ import {
 } from "@ngrx/data";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
-import { coursesReducer } from "./course.reducers";
 import { CourseComponent } from "./course/course.component";
 import { CoursesCardListComponent } from "./courses-card-list/courses-card-list.component";
 import { CoursesEffects } from "./courses.effects";
@@ -32,6 +31,7 @@ import { EditCourseDialogComponent } from "./edit-course-dialog/edit-course-dial
 import { HomeComponent } from "./home/home.component";
 import { compareCourses } from "./model/course";
 import { compareLessons } from "./model/lesson";
+import { coursesReducer } from "./reducers/course.reducers";
 import { CoursesDataService } from "./services/courses-data.service";
 import { CourseEntityService } from "./services/courses-entity.service";
 import { CoursesHttpService } from "./services/courses-http.service";
