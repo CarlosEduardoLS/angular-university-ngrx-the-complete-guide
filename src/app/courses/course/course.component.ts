@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
-import { concatMap, tap } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import { concatMap, map, tap } from "rxjs/operators";
 import { Course } from "../model/course";
 import { Lesson } from "../model/lesson";
+import { CourseEntityService } from "../services/courses-entity.service";
 import { CoursesHttpService } from "../services/courses-http.service";
+import { LessonEntityService } from "../services/lesson-entity.service";
 
 @Component({
   selector: "course",
@@ -12,6 +14,12 @@ import { CoursesHttpService } from "../services/courses-http.service";
   styleUrls: ["./course.component.css"],
 })
 export class CourseComponent implements OnInit {
+  constructor(
+    private coursesService: CourseEntityService,
+    private lessonsService: LessonEntityService,
+    private route: ActivatedRoute
+  ) {}
+
   course$: Observable<Course>;
 
   lessons$: Observable<Lesson[]>;
@@ -20,20 +28,14 @@ export class CourseComponent implements OnInit {
 
   nextPage = 0;
 
-  constructor(
-    private coursesService: CoursesHttpService,
-    private route: ActivatedRoute
-  ) {}
-
   ngOnInit() {
     const courseUrl = this.route.snapshot.paramMap.get("courseUrl");
 
-    this.course$ = this.coursesService.findCourseByUrl(courseUrl);
-
-    this.lessons$ = this.course$.pipe(
-      concatMap((course) => this.coursesService.findLessons(course.id)),
-      tap(console.log)
+    this.course$ = this.coursesService.entities$.pipe(
+      map((courses) => courses.find((course) => course.url == courseUrl))
     );
+
+    this.lessons$ = of([]);
   }
 
   loadLessonsPage(course: Course) {}
